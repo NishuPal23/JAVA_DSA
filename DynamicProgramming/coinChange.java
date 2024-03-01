@@ -35,10 +35,23 @@ public class coinChange {
 
 
     //Tabulation
-    // public static int solveTab(int[]arr, int target){
-    //     int[]dp = new int[target];
+    public static int solveTab(int[]arr, int target){
+        int[]dp = new int[target+1];
+        for(int i =0;i<=target;i++){
+            dp[i] = Integer.MAX_VALUE;
+        }
+        dp[0] =0;
+        for(int i =1;i<=target;i++){
+            for(int j = 0 ;j<arr.length;j++){
+               if(i-arr[j]>=0 && dp[i-arr[j]]!=Integer.MAX_VALUE){
+                dp[i] = Math.min(dp[i-arr[j]]+1,dp[i]);
+               }
+                
+            }
+        }
+        return dp[target] ;
         
-    // }
+    }
 
     public static int minCoins(int[]arr, int target){
         //Recursion
@@ -53,11 +66,21 @@ public class coinChange {
 
         //Memoization
         //int n = arr.length;
-        int[]dp = new int[target+1];
-        for(int i=0;i<=target;i++){
-            dp[i]=-1;
-        }
-        int ans =  solveMemo(arr,target,dp);
+        // int[]dp = new int[target+1];
+        // for(int i=0;i<=target;i++){
+        //     dp[i]=-1;
+        // }
+        // int ans =  solveMemo(arr,target,dp);
+        // if(ans==Integer.MAX_VALUE){
+        //     return -1;
+        // }
+        // else{
+        //     return ans;
+        // }
+
+
+        //Tabulation
+        int ans =  solveTab(arr,target);
         if(ans==Integer.MAX_VALUE){
             return -1;
         }
