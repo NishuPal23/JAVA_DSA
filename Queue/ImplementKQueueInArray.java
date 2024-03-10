@@ -55,11 +55,11 @@ public class ImplementKQueueInArray {
         }
 
         //dequeue
-        public void dequeue(int qn){
+        public int dequeue(int qn){
             //overflow
             if(front[qn-1] ==-1){
                 System.out.println("empty");
-                return ;
+                return -1;
             }
             //find index
             int index = front[qn-1];
@@ -68,6 +68,7 @@ public class ImplementKQueueInArray {
             //free slot manage;
             next[index] = freeSpot;
             freeSpot = index;
+            return arr[index];
 
         }
 
@@ -75,6 +76,22 @@ public class ImplementKQueueInArray {
 
     
     public static void main(String[] args) {
-        
+        ImplementKQueueInArray ks = new ImplementKQueueInArray(10,3);
+        ks.enqueue(15, 3); 
+        ks.enqueue(45, 3); 
+       
+        // Let us put some items in queue number 1 
+        ks.enqueue(17, 2); 
+        ks.enqueue(49, 2); 
+        ks.enqueue(39, 2); 
+       
+        // Let us put some items in queue number 0 
+        ks.enqueue(11, 1); 
+        ks.enqueue(9, 1); 
+        ks.enqueue(7, 1); 
+         
+        System.out.println("Dequeued element from queue 2 is " + ks.dequeue(3)); 
+        System.out.println("Dequeued element from queue 1 is " + ks.dequeue(2)); 
+        System.out.println("Dequeued element from queue 0 is " + ks.dequeue(1) ); 
     }
 }
